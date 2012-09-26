@@ -1,4 +1,4 @@
-class @Exify
+class Exify
   @debug = no
   
   constructor: (@options) ->

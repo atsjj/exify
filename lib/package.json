@@ -1,0 +1,18 @@
+{
+  "name": "Exify",
+  "summary": "EXIF Parser for JavaScript",
+  "description": "EXIF Parser for JavaScript",
+  "homepage": "http://github.com/atsjj/exify.js",
+  "author": "Steven Jabour",
+  "version": "0.0.1",
+  
+  "directories": {
+    "lib": ["*"]
+  },
+  
+  "build": {
+    "exify.js": {
+      "files": ["exify.js.coffee", "table.js.coffee", "*.coffee"]
+    }
+  }
+}

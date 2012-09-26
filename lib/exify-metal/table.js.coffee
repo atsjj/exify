@@ -1,4 +1,4 @@
-class Table extends @Exify
+class Table extends Exify
   constructor: (@table) ->
     
   lookup: (key) ->

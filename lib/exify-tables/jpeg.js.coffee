@@ -1,4 +1,4 @@
-new Exify::Table 'jpeg'
+new Table 'jpeg'
   0x0100: "image_width"
   0x0101: "image_height"
   0x8769: "ExifIFDPointer"

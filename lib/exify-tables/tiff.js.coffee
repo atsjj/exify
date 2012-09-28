@@ -1,4 +1,4 @@
-new Exify::Table 'tiff'
+new Table 'tiff'
   0x9000: "exif_version"
   0xA000: "flashpix_version"
   0xA001: "color_space"

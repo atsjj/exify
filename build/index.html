@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exify</title>
+  <link href='http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/css/bootstrap.min.css' rel='stylesheet'>
+</head>
+<body>
+<style>
+  /*<![CDATA[*/
+    .navbar .center {
+      float: none;
+      text-align: center;
+    }
+    
+    .form-horizontal .center {
+      padding-left: 0px;
+      text-align: center;
+    }
+    
+    ol {
+      list-style-type: none;
+    }
+  /*]]>*/
+</style>
+<div class='navbar'>
+  <div class='navbar-inner'>
+    <div class='brand center'>Tag Our Swag</div>
+  </div>
+</div>
+<div class='container'>
+  <div class='hero-unit'>
+    <h1>
+      You're It!
+      <small>
+        Now, send us that photo to win some sweet gear.
+      </small>
+    </h1>
+  </div>
+</div>
+<div class='container'>
+  <form action='//localhost:3000/forms/tag-our-swag' class='form-horizontal' enctype='multipart/form-data' method='post'>
+    <fieldset>
+      <legend>Let's get personal...</legend>
+      <ol>
+        <li class='control-group'>
+          <div class='control-label'>
+            <label for='name'>What's your name?</label>
+          </div>
+          <div class='controls'>
+            <input autofocus name='name' required type='text'>
+          </div>
+        </li>
+        <li class='control-group'>
+          <div class='control-label'>
+            <label for='email'>Now, your email?</label>
+          </div>
+          <div class='controls'>
+            <input name='email' placeholder='Pinky swear not to spam!' required type='email'>
+            <span class='help-block'>
+              We hate spam!
+              <a href='#privacy'>Here's what we promise</a>
+              to do with your email address!
+            </span>
+          </div>
+        </li>
+      </ol>
+    </fieldset>
+    <fieldset>
+      <legend>Show us the goods!</legend>
+      <ol>
+        <li class='pull-left' style='padding-top: 89px'>
+          <label for='attachment'>Let's browse for that photo of you in our swag!</label>
+          <input id='attachment' name='attachment' data-preview="#swag_preview" required type='file' style="position: absolute; top: -100px">
+          <button class="btn" data-target="#attachment" data-file="open">Pick a Photo</button>
+        </li>
+        <li class='pull-right'>
+          <img class='img-polaroid' id='swag_preview' src='http://placehold.it/256/08C/FFF&amp;text=You!' style='width: 256px; height: 256px; -webkit-transform: rotateZ(17deg);'>
+        </li>
+      </ol>
+    </fieldset>
+    <fieldset>
+      <legend>Time to make it formal.</legend>
+      <ol>
+        <li class='form-actions center'>
+          <button class='btn btn-large btn-primary' type='submit'>
+            Tag us!
+          </button>
+        </li>
+      </ol>
+    </fieldset>
+  </form>
+</div>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/bootstrap.min.js'></script>
+<script src='bootstrap-preview.js'></script>
+<script src='../build.js'></script>
+<script>
+  $('body').on('change.filepreview.data-api', '[data-preview]', function (e) {
+    var stream = new FileReader()
+      , file = e.currentTarget.files[0]
+
+    stream.onload = (function (f) {
+      return function (e) {
+        window.exif = new ExifyArray(new Uint8Array(e.target.result))
+      }
+    })(file)
+
+    stream.readAsArrayBuffer(file)
+  })
+</script>
+</body>
+</html>

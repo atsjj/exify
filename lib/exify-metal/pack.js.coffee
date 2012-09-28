@@ -1,21 +1,25 @@
-class Pack
-  @buffer = null
-  @cursor = null
-  @parameter = ///([A-Za-z\@])([0-9]{0,})///g
-  
-  constructor: (@buffer = new ArrayBuffer())->
+class ExifyArray
+  constructor: (buffer) ->
+    @parameter = ///([CSLQXx\@])([0-9]{0,})///g
+    @buffer = buffer || new Uint8Array()
     
-  pack: (templateString) =>
+  pack: (templateString = "") ->
+    return false unless @parameter.test templateString
+    
     @cursor = 0
     data = dir = tree = []
     
     tree = templateString.match @parameter
+    dir = []
+    for i = 0; i < tree.length; i++
+      dir.push [tree[i], tree[i+1] || 0]
+      i++
     
-    dir = for branch of tree
-      node for node of branch.match @parameter
-    
-    data = for template, length in dir
-      @[template](length) if @[template]?
+    data = []
+    for i = 0; i < dir.length; i++
+      data.push @[dir[i][0]](dir[i][1]) if @[dir[i][0]]
+      
+    console.dir(data)
     
     data
     
@@ -23,7 +27,6 @@ class Pack
   "C": () => # 8-bit, char
     cursor = @cursor
     @cursor++
-    
     @buffer[cursor]
     
   "S": () => # 16-bit, short, big-endian for now
@@ -44,3 +47,5 @@ class Pack
     @cursor += cursor
   "x": (cursor = 1) =>
     @cursor -= cursor
+    
+window.ExifyArray = ExifyArray

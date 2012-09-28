@@ -1,4 +1,4 @@
-new Exify::Table 'gps'
+new Table 'gps'
   0x0000: "gps_version_id"
   0x0001: "gps_latitude_ref"
   0x0002: "gps_latitude"
